@@ -1077,8 +1077,8 @@
     // Вставь сюда скопированную ссылку из Google Apps Script
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGTYgBXSmxXj75KdO4F1heTp7q6YObaVKTj_BdZz5mnl3CSkezZEwcHibwQ7h-lavHSw/exec";
 
-    const rsvpForm = document.getElementById('rsvpForm'); // Убедись, что id формы rsvpForm
-    const nameInput = document.getElementById('guestName'); // Убедись, что id инпута имени guestName
+    const rsvpForm = document.getElementById('weddingForm');
+    const nameInput = document.getElementById('nameInput');
 
     // 1. Отслеживаем ввод "99999" в поле имени
     nameInput.addEventListener('input', function() {
@@ -1129,7 +1129,7 @@
         e.preventDefault();
         
         const formData = {
-            name: document.getElementById('guestName').value,
+            name: nameInput.value,
             attendance: document.querySelector('input[name="attendance"]:checked')?.value || 'Не указано',
             drinks: Array.from(document.querySelectorAll('input[name="drinks"]:checked')).map(c => c.value).join(', '),
             message: document.getElementById('guestMessage')?.value || ''
