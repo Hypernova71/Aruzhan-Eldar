@@ -1073,6 +1073,8 @@
         // Запускаем смену каждые 2 секунды (2000 мс)
         setInterval(rotatePhotos, 2000);
     </script>
+
+
    <script>
     // Ссылка на твоё веб-приложение Google Apps Script
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGTYgBXSmxXj75KdO4F1heTp7q6YObaVKTj_BdZz5mnl3CSkezZEwcHibwQ7h-lavHSw/exec";
@@ -1088,7 +1090,7 @@
         }
     });
 
-    // 2. Функция загрузки списка гостей из Таблицы
+    // 2. Функция загрузки списка гостей из Таблицы (через JSONP для обхода CORS)
     function loadAdminPanel() {
         const panel = document.getElementById('adminPanel');
         const tbody = document.querySelector('#adminTable tbody');
@@ -1096,40 +1098,54 @@
         
         panel.style.display = 'block';
         panel.scrollIntoView({ behavior: 'smooth' });
+        stats.innerText = "Загрузка списка гостей...";
 
-        fetch(SCRIPT_URL)
-            .then(res => res.json())
-            .then(data => {
-                tbody.innerHTML = '';
-                let totalWillCome = 0;
+        // Создаем уникальное имя callback-функции
+        const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+        
+        window[callbackName] = function(data) {
+            // Удаляем временный скрипт со страницы
+            delete window[callbackName];
+            document.body.removeChild(script);
 
-                data.forEach(guest => {
-                    if (guest.attendance && (guest.attendance.toLowerCase().includes('прид') || guest.attendance.toLowerCase().includes('да'))) {
-                        totalWillCome++;
-                    }
-                    const tr = document.createElement('tr');
-                    tr.style.borderBottom = '1px solid #eee';
-                    tr.innerHTML = `
-                        <td style="padding: 10px; font-weight: bold;">${guest.name || ''}</td>
-                        <td style="padding: 10px;">${guest.attendance || ''}</td>
-                        <td style="padding: 10px;">${guest.drinks || ''}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
+            tbody.innerHTML = '';
+            let totalWillCome = 0;
 
-                stats.innerText = `Всего ответов: ${data.length} | Точно придут: ${totalWillCome}`;
-            })
-            .catch(err => {
-                console.error(err);
-                stats.innerText = "Ошибка загрузки списка.";
+            if (!Array.isArray(data) || data.length === 0) {
+                stats.innerText = "Список пока пуст или нет данных.";
+                return;
+            }
+
+            data.forEach(guest => {
+                if (guest.attendance && (guest.attendance.toLowerCase().includes('прид') || guest.attendance.toLowerCase().includes('да'))) {
+                    totalWillCome++;
+                }
+                const tr = document.createElement('tr');
+                tr.style.borderBottom = '1px solid #eee';
+                tr.innerHTML = `
+                    <td style="padding: 10px; font-weight: bold;">${guest.name || ''}</td>
+                    <td style="padding: 10px;">${guest.attendance || ''}</td>
+                    <td style="padding: 10px;">${guest.drinks || ''}</td>
+                `;
+                tbody.appendChild(tr);
             });
+
+            stats.innerText = `Всего ответов: ${data.length} | Точно придут: ${totalWillCome}`;
+        };
+
+        // Добавляем тег script для запроса данных в обход CORS
+        const script = document.createElement('script');
+        script.src = `${SCRIPT_URL}?callback=${callbackName}`;
+        script.onerror = function() {
+            stats.innerText = "Ошибка загрузки списка.";
+        };
+        document.body.appendChild(script);
     }
 
     // 3. Отправка формы гостем в Google Таблицу
     rsvpForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Собираем данные из формы (используем правильное имя formData)
         const formData = {
             name: nameInput.value,
             attendance: document.querySelector('input[name="attendance"]:checked')?.value || 'Не указано',
