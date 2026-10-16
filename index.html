@@ -1136,14 +1136,23 @@
         };
 
         fetch(SCRIPT_URL, {
-            method: 'POST',
-            body: JSON.stringify(formData)
-        })
-        .then(() => {
-            alert('Спасибо! Ваш ответ принят.');
-            rsvpForm.reset();
-        })
-        .catch(() => alert('Произошла ошибка, попробуйте еще раз.'));
+    method: 'POST',
+    mode: 'no-cors', // <--- Обязательно добавь эту строчку
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+.then(response => {
+    // так как mode: 'no-cors' возвращает непрозрачный ответ, 
+    // просто показываем сообщение об успехе
+    alert("Спасибо за ответ!");
+    rsvpForm.reset();
+})
+.catch(error => {
+    console.error('Ошибка:', error);
+    alert("Произошла ошибка, попробуйте еще раз.");
+});
     });
 </script>
 
