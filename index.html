@@ -1076,21 +1076,20 @@
 
 
    <script>
-    // Ссылка на твоё веб-приложение Google Apps Script
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGTYgBXSmxXj75KdO4F1heTp7q6YObaVKTj_BdZz5mnl3CSkezZEwcHibwQ7h-lavHSw/exec";
 
     const rsvpForm = document.getElementById('weddingForm');
     const nameInput = document.getElementById('nameInput');
 
-    // 1. Отслеживаем ввод "99999" в поле имени для открытия админки
+    // 1. Отслеживаем ввод "99999" в поле имени
     nameInput.addEventListener('input', function() {
         if (this.value.trim() === '99999') {
-            this.value = ''; // очищаем поле
-            loadAdminPanel(); // открываем админку
+            this.value = ''; 
+            loadAdminPanel(); 
         }
     });
 
-    // 2. Функция загрузки списка гостей из Таблицы (через JSONP для обхода CORS)
+    // 2. Функция загрузки списка гостей (без напитков)
     function loadAdminPanel() {
         const panel = document.getElementById('adminPanel');
         const tbody = document.querySelector('#adminTable tbody');
@@ -1100,11 +1099,9 @@
         panel.scrollIntoView({ behavior: 'smooth' });
         stats.innerText = "Загрузка списка гостей...";
 
-        // Создаем уникальное имя callback-функции
         const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
         
         window[callbackName] = function(data) {
-            // Удаляем временный скрипт со страницы
             delete window[callbackName];
             document.body.removeChild(script);
 
@@ -1112,7 +1109,7 @@
             let totalWillCome = 0;
 
             if (!Array.isArray(data) || data.length === 0) {
-                stats.innerText = "Список пока пуст или нет данных.";
+                stats.innerText = "Список пока пуст.";
                 return;
             }
 
@@ -1122,10 +1119,10 @@
                 }
                 const tr = document.createElement('tr');
                 tr.style.borderBottom = '1px solid #eee';
+                // Выводим только имя и статус присутствия (напитки убраны)
                 tr.innerHTML = `
                     <td style="padding: 10px; font-weight: bold;">${guest.name || ''}</td>
                     <td style="padding: 10px;">${guest.attendance || ''}</td>
-                    <td style="padding: 10px;">${guest.drinks || ''}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -1133,7 +1130,6 @@
             stats.innerText = `Всего ответов: ${data.length} | Точно придут: ${totalWillCome}`;
         };
 
-        // Добавляем тег script для запроса данных в обход CORS
         const script = document.createElement('script');
         script.src = `${SCRIPT_URL}?callback=${callbackName}`;
         script.onerror = function() {
@@ -1142,14 +1138,14 @@
         document.body.appendChild(script);
     }
 
-    // 3. Отправка формы гостем в Google Таблицу
+    // 3. Отправка формы гостем
     rsvpForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const formData = {
             name: nameInput.value,
             attendance: document.querySelector('input[name="attendance"]:checked')?.value || 'Не указано',
-            drinks: Array.from(document.querySelectorAll('input[name="drinks"]:checked')).map(c => c.value).join(', '),
+            drinks: '', // Оставляем пустым, раз напитки убрали
             message: document.getElementById('guestMessage')?.value || ''
         };
 
@@ -1161,13 +1157,13 @@
             },
             body: JSON.stringify(formData)
         })
-        .then(response => {
+        .then(() => {
             alert("Спасибо за ответ!");
             rsvpForm.reset();
         })
         .catch(error => {
             console.error('Ошибка:', error);
-            alert("Произошла ошибка, попробуйте еще раз.");
+            alert("Произошла ошибка при отправке.");
         });
     });
 </script>
