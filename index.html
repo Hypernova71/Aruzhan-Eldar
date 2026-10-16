@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Приглашение на свадьбу — Эльдар & Аружан</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Great+Vibes&family=Marck+Script&display=swap" rel="stylesheet">
 
     <style>
         /* --- 1. Базовые и Сброс стилей --- */
@@ -18,7 +19,8 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        html, body {
+        html,
+        body {
             width: 100%;
             /* height: 100%; убираем это */
             overflow-x: hidden;
@@ -35,9 +37,15 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;    
-            padding: 40px 20px; 
+            align-items: center;
+            padding: 40px 20px;
             position: relative;
+        }
+
+        .my-custom-text {
+           font-family: 'Caveat', cursive;
+            font-size: 45px;
+            font-weight: 300;
         }
 
         /* --- ПЕРВАЯ СЕКЦИЯ С РАМКОЙ НА ВЕСЬ ЭКРАН --- */
@@ -47,17 +55,19 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center; 
-            align-items: center;    
-            
+            justify-content: center;
+            align-items: center;
+
             /* Если хочешь идеальные пропорции листьев без вытягивания — измени 100% 100% на contain */
-            background-image: url('frame.png'); 
+            background-image: url('frame.png');
             background-position: center;
-            background-size: contain; /* или 100% 100%, если хочешь растяжение на весь экран */
+            background-size: contain;
+            /* или 100% 100%, если хочешь растяжение на весь экран */
             background-repeat: no-repeat;
             background-color: #FBF8F3;
-            
-            position: relative; /* Обязательно для позиционирования подсказки */
+
+            position: relative;
+            /* Обязательно для позиционирования подсказки */
             padding: 30px;
             box-sizing: border-box;
             overflow: hidden;
@@ -79,7 +89,7 @@
         }
 
         /* --- 3. Типографика --- */
-       /* Основной шрифт для имен */
+        /* Основной шрифт для имен */
         .names {
             font-family: 'Great Vibes', cursive;
             font-size: 4rem;
@@ -149,9 +159,11 @@
         }
 
         .btn-gis {
-            background-color: #60B026; /* 2GIS зеленый */
+            background-color: #60B026;
+            /* 2GIS зеленый */
             box-shadow: 0 4px 12px rgba(96, 176, 38, 0.3);
         }
+
         .btn-gis:active {
             background-color: #4A8C1C;
         }
@@ -172,7 +184,8 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
-            margin-top: 20px; /* Аккуратный отступ под именами */
+            margin-top: 20px;
+            /* Аккуратный отступ под именами */
         }
 
         .music-player-btn:active {
@@ -188,31 +201,39 @@
             bottom: auto !important;
             margin: 0 !important;
             z-index: 9999 !important;
-            
-            opacity: 0.5; /* 50% прозрачности */
+
+            opacity: 0.5;
+            /* 50% прозрачности */
             padding: 8px 16px;
             font-size: 0.75rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-            
+
             /* ВОТ ЗДЕСЬ НАСТРАИВАЕТСЯ ПЛАВНОСТЬ (0.4 секунды): */
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
         }
 
         .music-player-btn.fixed-top-right:hover {
-            opacity: 1; /* При наведении снова яркая */
+            opacity: 1;
+            /* При наведении снова яркая */
         }
+
         /* --- 5. Элементы интерфейса --- */
 
         /* Индикатор скролла */
         .scroll-hint {
-            position: absolute;       /* Вырываем из общего потока */
-            bottom: 25px;             /* Отступ 25px от самого нижнего края */
-            left: 0; 
-            right: 0;                 /* Растягиваем блок от левого до правого края */
-            margin: 0 auto;           /* Центрируем блок */
+            position: absolute;
+            /* Вырываем из общего потока */
+            bottom: 25px;
+            /* Отступ 25px от самого нижнего края */
+            left: 0;
+            right: 0;
+            /* Растягиваем блок от левого до правого края */
+            margin: 0 auto;
+            /* Центрируем блок */
             width: 100%;
-            text-align: center;       /* Центрируем текст внутри */
-            
+            text-align: center;
+            /* Центрируем текст внутри */
+
             font-family: 'Montserrat', sans-serif;
             font-size: 0.8rem;
             color: #B59B7C;
@@ -220,21 +241,37 @@
             animation: bounce 2s infinite;
             display: flex;
             flex-direction: column;
-            align-items: center;      /* Центрируем стрелочку */
+            align-items: center;
+            /* Центрируем стрелочку */
             gap: 3px;
-            z-index: 10;              /* Гарантируем, что слой сверху всех картинок */
-            pointer-events: none;     /* Чтобы не мешала кликам */
+            z-index: 10;
+            /* Гарантируем, что слой сверху всех картинок */
+            pointer-events: none;
+            /* Чтобы не мешала кликам */
         }
 
-        .scroll-hint::after { 
-            content: '↑'; 
-            font-size: 1.1rem; 
+        .scroll-hint::after {
+            content: '↑';
+            font-size: 1.1rem;
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-5px);}
-            60% {transform: translateY(-2px);}
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-5px);
+            }
+
+            60% {
+                transform: translateY(-2px);
+            }
         }
 
         /* Заголовки рукописным шрифтом */
@@ -322,7 +359,7 @@
             padding: 10px 12px;
             min-width: 65px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
         }
 
         .timer-box span {
@@ -366,10 +403,14 @@
             background: #FFF;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
             margin-top: 30px;
         }
-        .form-group { margin-bottom: 20px; }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
         .form-input {
             width: 100%;
             padding: 15px;
@@ -379,7 +420,11 @@
             font-size: 1rem;
             color: #4A4238;
         }
-        .form-input::placeholder { color: #B59B7C; opacity: 0.7; }
+
+        .form-input::placeholder {
+            color: #B59B7C;
+            opacity: 0.7;
+        }
 
         /* Радиокнопки */
         .radio-group {
@@ -389,6 +434,7 @@
             font-family: 'Montserrat', sans-serif;
             margin-top: 15px;
         }
+
         .radio-label {
             display: flex;
             align-items: center;
@@ -396,6 +442,7 @@
             cursor: pointer;
             font-size: 1rem;
         }
+
         .radio-input {
             appearance: none;
             width: 20px;
@@ -406,10 +453,12 @@
             transition: all 0.2s ease;
             position: relative;
         }
+
         .radio-input:checked {
             border-color: #7A6248;
             background-color: #7A6248;
         }
+
         .radio-input:checked::after {
             content: '';
             width: 8px;
@@ -431,13 +480,34 @@
 
         /* --- 6. Адаптация для мобильных --- */
         @media (max-width: 450px) {
-            .names { font-size: 3.5rem; }
-            .section-title { font-size: 2rem; }
-            p { font-size: 1.2rem; }
-            .timer { gap: 10px; }
-            .timer-item { padding: 10px; min-width: 60px; }
-            .timer-count { font-size: 1.6rem; }
-            .rsvp-form { padding: 20px; }
+            .names {
+                font-size: 3.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+            }
+
+            .timer {
+                gap: 10px;
+            }
+
+            .timer-item {
+                padding: 10px;
+                min-width: 60px;
+            }
+
+            .timer-count {
+                font-size: 1.6rem;
+            }
+
+            .rsvp-form {
+                padding: 20px;
+            }
         }
 
         /* Контейнер карусели фото ресторана */
@@ -475,6 +545,7 @@
             box-shadow: 0 4px 15px rgba(122, 98, 72, 0.25);
             margin-top: 15px;
         }
+
         .btn-map:hover {
             background-color: #634E38;
         }
@@ -497,9 +568,10 @@
             height: 120px;
             border-radius: 10px;
             overflow: hidden;
-            opacity: 0.55; /* Полупрозрачные */
+            opacity: 0.55;
+            /* Полупрозрачные */
             flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             background: #E0D7CD;
         }
 
@@ -510,19 +582,21 @@
             border-radius: 14px;
             overflow: hidden;
             flex-shrink: 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
             z-index: 2;
             background: #E0D7CD;
         }
 
         /* Настройки самих картинок */
-        .side-card img, .main-card img {
+        .side-card img,
+        .main-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
             transition: opacity 0.4s ease-in-out;
         }
+
         .hosts-names {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.3rem;
@@ -666,15 +740,18 @@
             width: 100%;
             padding: 35px 20px 45px;
             text-align: center;
-            border-top: 1px solid rgba(122, 98, 72, 0.15); /* Тонкая нежная линия сверху */
+            border-top: 1px solid rgba(122, 98, 72, 0.15);
+            /* Тонкая нежная линия сверху */
             margin-top: 50px;
-            background-color: rgba(122, 98, 72, 0.03); /* Едва заметный подтон для завершенности */
+            background-color: rgba(122, 98, 72, 0.03);
+            /* Едва заметный подтон для завершенности */
         }
 
         .footer-love {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.9rem;
-            color: #7A6248; /* Наш основной тёплый шоколадный цвет */
+            color: #7A6248;
+            /* Наш основной тёплый шоколадный цвет */
             margin-bottom: 8px;
             letter-spacing: 0.5px;
         }
@@ -692,11 +769,13 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 0.75rem;
             letter-spacing: 1px;
-            color: #A39382; /* Мягкий второстепенный бежевый цвет */
+            color: #A39382;
+            /* Мягкий второстепенный бежевый цвет */
             text-transform: uppercase;
         }
     </style>
 </head>
+
 <body>
 
     <!-- АУДИОФАЙЛ -->
@@ -709,9 +788,9 @@
     <section id="hero">
         <div class="hero-content">
             <div class="names">
-    Эльдар <br> & <br> <span class="custom-a">А</span>ружан
-</div>
-            
+                Эльдар <br> & <br> <span class="custom-a">А</span>ружан
+            </div>
+
             <!-- Дата на первом экране -->
             <div class="accent-text" style="font-size: 1rem; letter-spacing: 2px; margin-top: 20px;">
                 09.12.2026
@@ -719,7 +798,7 @@
 
             <!-- Кнопка музыки с твоим отступлением -->
             <button id="musicBtn" class="music-player-btn">
-                <span id="musicIcon">▶</span> 
+                <span id="musicIcon">▶</span>
                 <span id="musicText">Әуенді қосу</span>
             </button>
         </div>
@@ -749,10 +828,10 @@
             <div class="names" style="font-size: 4rem; text-align: left; padding-left: 10%; line-height: 1;">
                 Эльдар
             </div>
-            
+
             <!-- Символ & по центру -->
             <div class="names" style="font-size: 2.8rem; text-align: center; margin: 5px 0;">
-                және
+                ж<span class="my-custom-text">ә</span>не
             </div>
 
             <!-- Аружан снизу, со сдвигом вправо (padding-right: 20%) -->
@@ -791,7 +870,7 @@
             <div class="calendar-days">
                 <!-- Пустая ячейка для Понедельника (1 декабря — Вторник) -->
                 <div class="day empty"></div>
-                
+
                 <div class="day">1</div>
                 <div class="day">2</div>
                 <div class="day">3</div>
@@ -800,7 +879,7 @@
                 <div class="day">6</div>
                 <div class="day">7</div>
                 <div class="day">8</div>
-                
+
                 <!-- 9 Декабря с акцентным сердечком -->
                 <div class="day active-day">
                     <span>9</span>
@@ -833,7 +912,7 @@
         </div>
 
         <!-- СЕКЦИЯ: ТОЙҒА ДЕЙІН (ТАЙМЕР) -->
-        <div class="script-title" style="margin-top: 50px;">Тойға дейін:</div>
+        <div class="script-title" style="margin-top: 50px;">Той<span class="my-custom-text">ғ</span>а дейін:</div>
 
         <div class="timer-container">
             <div class="timer-box">
@@ -855,7 +934,7 @@
         </div>
     </section>
 
-   <!-- СЕКЦИЯ 4: МЕКЕН-ЖАЙЫМЫЗ (3 СТАТИЧНЫЕ КАРТОЧКИ) -->
+    <!-- СЕКЦИЯ 4: МЕКЕН-ЖАЙЫМЫЗ (3 СТАТИЧНЫЕ КАРТОЧКИ) -->
     <section id="location">
         <div class="script-title">Мекен-жайымыз:</div>
 
@@ -864,7 +943,7 @@
             <div class="side-card left-card">
                 <img id="imgLeft" src="Rest1.png" alt="Rest Left">
             </div>
-            
+
             <div class="main-card">
                 <img id="imgCenter" src="Rest2.png" alt="Rest Center">
             </div>
@@ -879,7 +958,7 @@
             УЛ. ЧИНГИЗ АЙТМАТОВ, 58<br>
             "ROYAL PALACE" МЕЙРАМХАНАСЫ
         </div>
-        
+
         <!-- КНОПКА КАРТЫ -->
         <a href="https://2gis.kz/astana/geo/70000001081186323/71.373352,51.157816" target="_blank" class="btn btn-map">
             📍 Картаны ашу
@@ -932,7 +1011,7 @@
             </form>
         </div>
 
-      
+
     </section>
 
     <!-- ФУТЕР (ПОДВАЛ САЙТА НА ВСЮ ШИРИНУ) -->
@@ -944,148 +1023,152 @@
             Все права защищены © 2026
         </p>
     </footer>
-<!-- Скрытая панель админа -->
-<div id="adminPanel" style="display: none; padding: 30px 20px; background: #fdfbf7; border-top: 2px dashed #7A6248; margin-top: 40px; text-align: center;">
-    <h3 style="font-family: 'Marck Script', cursive; font-size: 2.5rem; color: #7A6248; margin-bottom: 15px;">Список ответивших гостей</h3>
-    <p id="adminStats" style="font-weight: bold; color: #555; margin-bottom: 20px;">Загрузка данных...</p>
-    
-    <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ddd; border-radius: 12px; background: #fff; text-align: left; padding: 10px;">
-        <table id="adminTable" style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
-            <thead>
-                <tr style="background: #f4eee8; border-bottom: 1px solid #ccc;">
-                    <th style="padding: 10px;">Имя</th>
-                    <th style="padding: 10px;">Будет?</th>
-                    <th style="padding: 10px;">Напитки</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Сюда подгрузятся гости -->
-            </tbody>
-        </table>
+    <!-- Скрытая панель админа -->
+    <div id="adminPanel"
+        style="display: none; padding: 30px 20px; background: #fdfbf7; border-top: 2px dashed #7A6248; margin-top: 40px; text-align: center;">
+        <h3 style="font-family: 'Marck Script', cursive; font-size: 2.5rem; color: #7A6248; margin-bottom: 15px;">Список
+            ответивших гостей</h3>
+        <p id="adminStats" style="font-weight: bold; color: #555; margin-bottom: 20px;">Загрузка данных...</p>
+
+        <div
+            style="max-height: 400px; overflow-y: auto; border: 1px solid #ddd; border-radius: 12px; background: #fff; text-align: left; padding: 10px;">
+            <table id="adminTable" style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
+                <thead>
+                    <tr style="background: #f4eee8; border-bottom: 1px solid #ccc;">
+                        <th style="padding: 10px;">Имя</th>
+                        <th style="padding: 10px;">Будет?</th>
+                        <th style="padding: 10px;">Напитки</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Сюда подгрузятся гости -->
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </body>
+
 </html>
 
-    <script>
-        // 1. УПРАВЛЕНИЕ МУЗЫКОЙ И ИКОНКАМИ PLAY / PAUSE
-        const audio = document.getElementById('myAudio');
+<script>
+    // 1. УПРАВЛЕНИЕ МУЗЫКОЙ И ИКОНКАМИ PLAY / PAUSE
+    const audio = document.getElementById('myAudio');
+    const musicBtn = document.getElementById('musicBtn');
+    const musicIcon = document.getElementById('musicIcon');
+    const musicText = document.getElementById('musicText');
+
+    musicBtn.addEventListener('click', function () {
+        if (audio.paused) {
+            audio.play().then(() => {
+                musicIcon.textContent = '⏸'; // Иконка паузы
+                musicText.textContent = 'Пауза';
+            }).catch(error => {
+                console.log("Автовоспроизведение заблокировано браузером", error);
+                alert("Нажмите еще раз, чтобы включить музыку.");
+            });
+        } else {
+            audio.pause();
+            musicIcon.textContent = '▶'; // Иконка play
+            musicText.textContent = 'Әуенді қосу';
+        }
+    });
+
+    // ТАЙМЕР ОБРАТНОГО ОТСЧЕТА ДО 9 ДЕКАБРЯ 2026, 18:00
+    const weddingDate = new Date('December 9, 2026 18:00:00').getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+            document.getElementById('days').innerText = "00";
+            document.getElementById('hours').innerText = "00";
+            document.getElementById('minutes').innerText = "00";
+            document.getElementById('seconds').innerText = "00";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+    }
+
+    // Обновляем таймер каждую секунду
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 4. НАДЕЖНОЕ УПРАВЛЕНИЕ КНОПКОЙ ПРИ СКРОЛЛЕ
+    function updateMusicButtonPosition() {
         const musicBtn = document.getElementById('musicBtn');
-        const musicIcon = document.getElementById('musicIcon');
-        const musicText = document.getElementById('musicText');
-        
-        musicBtn.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    musicIcon.textContent = '⏸'; // Иконка паузы
-                    musicText.textContent = 'Пауза';
-                }).catch(error => {
-                    console.log("Автовоспроизведение заблокировано браузером", error);
-                    alert("Нажмите еще раз, чтобы включить музыку.");
-                });
-            } else {
-                audio.pause();
-                musicIcon.textContent = '▶'; // Иконка play
-                musicText.textContent = 'Әуенді қосу';
-            }
-        });
+        if (!musicBtn) return;
 
-        // ТАЙМЕР ОБРАТНОГО ОТСЧЕТА ДО 9 ДЕКАБРЯ 2026, 18:00
-        const weddingDate = new Date('December 9, 2026 18:00:00').getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            if (distance < 0) {
-                document.getElementById('days').innerText = "00";
-                document.getElementById('hours').innerText = "00";
-                document.getElementById('minutes').innerText = "00";
-                document.getElementById('seconds').innerText = "00";
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        // Срабатывает после прокрутки на 300 пикселей вниз
+        if (window.scrollY > 300) {
+            musicBtn.classList.add('fixed-top-right');
+        } else {
+            musicBtn.classList.remove('fixed-top-right');
         }
+    }
 
-        // Обновляем таймер каждую секунду
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+    window.addEventListener('scroll', updateMusicButtonPosition, { passive: true });
+    updateMusicButtonPosition();
 
-      // 4. НАДЕЖНОЕ УПРАВЛЕНИЕ КНОПКОЙ ПРИ СКРОЛЛЕ
-        function updateMusicButtonPosition() {
-            const musicBtn = document.getElementById('musicBtn');
-            if (!musicBtn) return;
+    // 5. ЛЕГКАЯ И НАДЕЖНАЯ СМЕНА КАРТИНЕК (Rest1 - Rest5)
+    const photoList = ['Rest1.png', 'Rest2.png', 'Rest3.png', 'Rest4.png', 'Rest5.png'];
+    let centerIdx = 0;
 
-            // Срабатывает после прокрутки на 300 пикселей вниз
-            if (window.scrollY > 300) {
-                musicBtn.classList.add('fixed-top-right');
-            } else {
-                musicBtn.classList.remove('fixed-top-right');
-            }
-        }
+    function rotatePhotos() {
+        const imgLeft = document.getElementById('imgLeft');
+        const imgCenter = document.getElementById('imgCenter');
+        const imgRight = document.getElementById('imgRight');
 
-        window.addEventListener('scroll', updateMusicButtonPosition, { passive: true });
-        updateMusicButtonPosition();
+        if (!imgLeft || !imgCenter || !imgRight) return;
 
-        // 5. ЛЕГКАЯ И НАДЕЖНАЯ СМЕНА КАРТИНЕК (Rest1 - Rest5)
-        const photoList = ['Rest1.png', 'Rest2.png', 'Rest3.png', 'Rest4.png', 'Rest5.png'];
-        let centerIdx = 0;
+        // Вычисляем индексы для левой и правой картинок
+        const leftIdx = (centerIdx - 1 + photoList.length) % photoList.length;
+        const rightIdx = (centerIdx + 1) % photoList.length;
 
-        function rotatePhotos() {
-            const imgLeft = document.getElementById('imgLeft');
-            const imgCenter = document.getElementById('imgCenter');
-            const imgRight = document.getElementById('imgRight');
+        // Плавная смена через затухание
+        imgLeft.style.opacity = 0;
+        imgCenter.style.opacity = 0;
+        imgRight.style.opacity = 0;
 
-            if (!imgLeft || !imgCenter || !imgRight) return;
+        setTimeout(() => {
+            imgLeft.src = photoList[leftIdx];
+            imgCenter.src = photoList[centerIdx];
+            imgRight.src = photoList[rightIdx];
 
-            // Вычисляем индексы для левой и правой картинок
-            const leftIdx = (centerIdx - 1 + photoList.length) % photoList.length;
-            const rightIdx = (centerIdx + 1) % photoList.length;
+            imgLeft.style.opacity = 0.55;
+            imgCenter.style.opacity = 1;
+            imgRight.style.opacity = 0.55;
 
-            // Плавная смена через затухание
-            imgLeft.style.opacity = 0;
-            imgCenter.style.opacity = 0;
-            imgRight.style.opacity = 0;
+            // Сдвигаем очередь для следующего шага
+            centerIdx = (centerIdx + 1) % photoList.length;
+        }, 300);
+    }
 
-            setTimeout(() => {
-                imgLeft.src = photoList[leftIdx];
-                imgCenter.src = photoList[centerIdx];
-                imgRight.src = photoList[rightIdx];
-
-                imgLeft.style.opacity = 0.55;
-                imgCenter.style.opacity = 1;
-                imgRight.style.opacity = 0.55;
-
-                // Сдвигаем очередь для следующего шага
-                centerIdx = (centerIdx + 1) % photoList.length;
-            }, 300);
-        }
-
-        // Запускаем смену каждые 2 секунды (2000 мс)
-        setInterval(rotatePhotos, 2000);
-    </script>
+    // Запускаем смену каждые 2 секунды (2000 мс)
+    setInterval(rotatePhotos, 2000);
+</script>
 
 
-   <script>
+<script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGTYgBXSmxXj75KdO4F1heTp7q6YObaVKTj_BdZz5mnl3CSkezZEwcHibwQ7h-lavHSw/exec";
 
     const rsvpForm = document.getElementById('weddingForm');
     const nameInput = document.getElementById('nameInput');
 
     // 1. Отслеживаем ввод "99999" в поле имени
-    nameInput.addEventListener('input', function() {
+    nameInput.addEventListener('input', function () {
         if (this.value.trim() === '99999') {
-            this.value = ''; 
-            loadAdminPanel(); 
+            this.value = '';
+            loadAdminPanel();
         }
     });
 
@@ -1094,14 +1177,14 @@
         const panel = document.getElementById('adminPanel');
         const tbody = document.querySelector('#adminTable tbody');
         const stats = document.getElementById('adminStats');
-        
+
         panel.style.display = 'block';
         panel.scrollIntoView({ behavior: 'smooth' });
         stats.innerText = "Загрузка списка гостей...";
 
         const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
-        
-        window[callbackName] = function(data) {
+
+        window[callbackName] = function (data) {
             delete window[callbackName];
             document.body.removeChild(script);
 
@@ -1132,16 +1215,16 @@
 
         const script = document.createElement('script');
         script.src = `${SCRIPT_URL}?callback=${callbackName}`;
-        script.onerror = function() {
+        script.onerror = function () {
             stats.innerText = "Ошибка загрузки списка.";
         };
         document.body.appendChild(script);
     }
 
     // 3. Отправка формы гостем
-    rsvpForm.addEventListener('submit', function(e) {
+    rsvpForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         const formData = {
             name: nameInput.value,
             attendance: document.querySelector('input[name="attendance"]:checked')?.value || 'Не указано',
@@ -1157,16 +1240,17 @@
             },
             body: JSON.stringify(formData)
         })
-        .then(() => {
-            alert("Спасибо за ответ!");
-            rsvpForm.reset();
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert("Произошла ошибка при отправке.");
-        });
+            .then(() => {
+                alert("Спасибо за ответ!");
+                rsvpForm.reset();
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert("Произошла ошибка при отправке.");
+            });
     });
 </script>
 
 </body>
+
 </html>
