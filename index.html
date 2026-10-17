@@ -55,20 +55,17 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* Возвращаем центрирование */
             align-items: center;
 
-            /* Если хочешь идеальные пропорции листьев без вытягивания — измени 100% 100% на contain */
             background-image: url('frame.png');
-            background-position: center;
+            background-position: center 30%; /* Легкий сдвиг рамки чуть выше центра */
             background-size: contain;
-            /* или 100% 100%, если хочешь растяжение на весь экран */
             background-repeat: no-repeat;
             background-color: #FBF8F3;
 
             position: relative;
-            /* Обязательно для позиционирования подсказки */
-            padding: 30px;
+            padding: 20px;
             box-sizing: border-box;
             overflow: hidden;
         }
@@ -82,10 +79,10 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            height: 100%;
             width: 100%;
             max-width: 340px;
-            gap: 20px;
+            margin-top: -80px; /* Совсем небольшой аккуратный подъём контента */
+            gap: 15px;
         }
 
         /* --- 3. Типографика --- */
@@ -222,7 +219,7 @@
         .scroll-hint {
             position: absolute;
             /* Вырываем из общего потока */
-            bottom: 25px;
+            bottom: 50px;
             /* Отступ 25px от самого нижнего края */
             left: 0;
             right: 0;
