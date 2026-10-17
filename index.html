@@ -1059,7 +1059,7 @@
     musicBtn.addEventListener('click', function () {
         if (audio.paused) {
             audio.play().then(() => {
-                musicIcon.textContent = '⏸'; // Иконка паузы
+                musicIcon.textContent = '||'; // Иконка паузы
                 musicText.textContent = 'Пауза';
             }).catch(error => {
                 console.log("Автовоспроизведение заблокировано браузером", error);
