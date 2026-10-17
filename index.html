@@ -185,7 +185,6 @@
             gap: 8px;
             transition: all 0.3s ease;
             margin-top: 20px;
-            -webkit-tap-highlight-color: transparent;
         }
 
         .music-player-btn:active {
@@ -1060,7 +1059,7 @@
     musicBtn.addEventListener('click', function () {
         if (audio.paused) {
             audio.play().then(() => {
-                musicIcon.textContent = '⏸'; // Иконка паузы
+                musicIcon.textContent = '||'; // Иконка паузы
                 musicText.textContent = 'Пауза';
             }).catch(error => {
                 console.log("Автовоспроизведение заблокировано браузером", error);
