@@ -1191,17 +1191,15 @@
                     }
 
                     data.forEach(guest => {
-                        if (guest.attendance && (guest.attendance.toLowerCase().includes('прид') || guest.attendance.toLowerCase().includes('да'))) {
-                            totalWillCome++;
-                        }
-                        const tr = document.createElement('tr');
-                        tr.style.borderBottom = '1px solid #eee';
-                        tr.innerHTML = `
+                        if (guest.attendance && (guest.attendance.toLowerCase().includes('прид') || guest.attendance.toLowerCase().includes('да') || guest.attendance.toLowerCase().includes('келе'))) {
+                            const tr = document.createElement('tr');
+                            tr.style.borderBottom = '1px solid #eee';
+                            tr.innerHTML = `
                     <td style="padding: 10px; font-weight: bold;">${guest.name || ''}</td>
                     <td style="padding: 10px;">${guest.attendance || ''}</td>
                 `;
-                        tbody.appendChild(tr);
-                    });
+                            tbody.appendChild(tr);
+                        });
 
                     stats.innerText = `Всего ответов: ${data.length} | Точно придут: ${totalWillCome}`;
                 };
