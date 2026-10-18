@@ -8,7 +8,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Great+Vibes&family=Marck+Script&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Great+Vibes&family=Marck+Script&display=swap"
+        rel="stylesheet">
 
     <style>
         /* --- 1. Базовые и Сброс стилей --- */
@@ -43,7 +45,7 @@
         }
 
         .my-custom-text {
-           font-family: 'Caveat', cursive;
+            font-family: 'Caveat', cursive;
             font-size: 45px;
             font-weight: 300;
         }
@@ -55,11 +57,13 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Возвращаем центрирование */
+            justify-content: center;
+            /* Возвращаем центрирование */
             align-items: center;
 
             background-image: url('frame.png');
-            background-position: center 20%; /* Легкий сдвиг рамки чуть выше центра */
+            background-position: center 20%;
+            /* Легкий сдвиг рамки чуть выше центра */
             background-size: contain;
             background-repeat: no-repeat;
             background-color: #FBF8F3;
@@ -81,7 +85,8 @@
             text-align: center;
             width: 100%;
             max-width: 340px;
-            margin-top: -130px; /* Совсем небольшой аккуратный подъём контента */
+            margin-top: -130px;
+            /* Совсем небольшой аккуратный подъём контента */
             gap: 15px;
         }
 
@@ -1042,6 +1047,19 @@
             </table>
         </div>
     </div>
+
+    <!-- Свой красивый модальный блок вместо стандартного alert -->
+    <div id="customModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 10000; align-items: center; justify-content: center;">
+        <div
+            style="background: #FFF; padding: 30px 20px; border-radius: 20px; width: 90%; max-width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+            <p
+                style="font-family: 'Montserrat', sans-serif; font-size: 1.05rem; color: #7A6248; margin-bottom: 20px; line-height: 1.4;">
+                Рахмет! Сіздің жауабыңыз қабылданды.</p>
+            <button id="closeModalBtn"
+                style="background: #7A6248; color: #FFF; border: none; padding: 12px 30px; border-radius: 25px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 12px rgba(122, 98, 72, 0.25);">OK</button>
+        </div>
+    </div>
 </body>
 
 </html>
@@ -1054,70 +1072,53 @@
     const musicText = document.getElementById('musicText');
 
     musicBtn.addEventListener('click', function () {
-        if (audio.paused) {
-            audio.play().then(() => {
-                musicIcon.textContent = '||'; // Иконка паузы
-                musicText.textContent = 'Пауза';
-            }).catch(error => {
-                console.log("Автовоспроизведение заблокировано браузером", error);
-                alert("Нажмите еще раз, чтобы включить музыку.");
-            });
-        } else {
-            audio.pause();
-            musicIcon.textContent = '▶'; // Иконка play
-            musicText.textContent = 'Әуенді қосу';
-        }
+    if (audio.paused) {
+    audio.play().then(() => {
+    musicIcon.textContent = '||'; // Иконка паузы
+    musicText.textContent = 'Пауза';
+    }).catch(error => {
+    console.log("Автовоспроизведение заблокировано браузером", error);
+    alert("Нажмите еще раз, чтобы включить музыку.");
+    });
+    } else {
+    audio.pause();
+    musicIcon.textContent = '▶'; // Иконка play
+    musicText.textContent = 'Әуенді қосу';
+    }
     });
 
     // 2. ТАЙМЕР ОБРАТНОГО ОТСЧЕТА ДО 9 ДЕКАБРЯ 2026, 18:00
     const weddingDate = new Date('December 9, 2026 18:00:00').getTime();
 
     function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = weddingDate - now;
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
 
-        if (distance < 0) {
-            document.getElementById('days').innerText = "00";
-            document.getElementById('hours').innerText = "00";
-            document.getElementById('minutes').innerText = "00";
-            document.getElementById('seconds').innerText = "00";
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // 3. НАДЕЖНОЕ УПРАВЛЕНИЕ КНОПКОЙ ПРИ СКРОЛЛЕ
-    function updateMusicButtonPosition() {
-        const musicBtn = document.getElementById('musicBtn');
-        if (!musicBtn) return;
-
-        if (window.scrollY > 300) {
-            musicBtn.classList.add('fixed-top-right');
+    if (distance < 0) { document.getElementById('days').innerText="00" ; document.getElementById('hours').innerText="00"
+        ; document.getElementById('minutes').innerText="00" ; document.getElementById('seconds').innerText="00" ;
+        return; } const days=Math.floor(distance / (1000 * 60 * 60 * 24)); const hours=Math.floor((distance % (1000 * 60
+        * 60 * 24)) / (1000 * 60 * 60)); const minutes=Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); const
+        seconds=Math.floor((distance % (1000 * 60)) / 1000); document.getElementById('days').innerText=days < 10 ? '0' +
+        days : days; document.getElementById('hours').innerText=hours < 10 ? '0' + hours : hours;
+        document.getElementById('minutes').innerText=minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('seconds').innerText=seconds < 10 ? '0' + seconds : seconds; }
+        setInterval(updateCountdown, 1000); updateCountdown(); // 3. НАДЕЖНОЕ УПРАВЛЕНИЕ КНОПКОЙ ПРИ СКРОЛЛЕ function
+        updateMusicButtonPosition() { const musicBtn=document.getElementById('musicBtn'); if (!musicBtn) return; if
+        (window.scrollY> 300) {
+        musicBtn.classList.add('fixed-top-right');
         } else {
-            musicBtn.classList.remove('fixed-top-right');
+        musicBtn.classList.remove('fixed-top-right');
         }
-    }
+        }
 
-    window.addEventListener('scroll', updateMusicButtonPosition, { passive: true });
-    updateMusicButtonPosition();
+        window.addEventListener('scroll', updateMusicButtonPosition, { passive: true });
+        updateMusicButtonPosition();
 
-    // 4. ЛЕГКАЯ И НАДЕЖНАЯ СМЕНА КАРТИНЕК (Rest1 - Rest5)
-    const photoList = ['Rest1.png', 'Rest2.png', 'Rest3.png', 'Rest4.png', 'Rest5.png'];
-    let centerIdx = 0;
+        // 4. ЛЕГКАЯ И НАДЕЖНАЯ СМЕНА КАРТИНЕК (Rest1 - Rest5)
+        const photoList = ['Rest1.png', 'Rest2.png', 'Rest3.png', 'Rest4.png', 'Rest5.png'];
+        let centerIdx = 0;
 
-    function rotatePhotos() {
+        function rotatePhotos() {
         const imgLeft = document.getElementById('imgLeft');
         const imgCenter = document.getElementById('imgCenter');
         const imgRight = document.getElementById('imgRight');
@@ -1132,112 +1133,117 @@
         imgRight.style.opacity = 0;
 
         setTimeout(() => {
-            imgLeft.src = photoList[leftIdx];
-            imgCenter.src = photoList[centerIdx];
-            imgRight.src = photoList[rightIdx];
+        imgLeft.src = photoList[leftIdx];
+        imgCenter.src = photoList[centerIdx];
+        imgRight.src = photoList[rightIdx];
 
-            imgLeft.style.opacity = 0.55;
-            imgCenter.style.opacity = 1;
-            imgRight.style.opacity = 0.55;
+        imgLeft.style.opacity = 0.55;
+        imgCenter.style.opacity = 1;
+        imgRight.style.opacity = 0.55;
 
-            centerIdx = (centerIdx + 1) % photoList.length;
+        centerIdx = (centerIdx + 1) % photoList.length;
         }, 300);
-    }
-
-    setInterval(rotatePhotos, 2000);
-</script>
-
-<script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGTYgBXSmxXj75KdO4F1heTp7q6YObaVKTj_BdZz5mnl3CSkezZEwcHibwQ7h-lavHSw/exec";
-
-    const rsvpForm = document.getElementById('weddingForm');
-    const nameInput = document.getElementById('nameInput');
-
-    // 1. Отслеживаем ввод "99999" в поле имени для админки
-    nameInput.addEventListener('input', function () {
-        if (this.value.trim() === '99999') {
-            this.value = '';
-            loadAdminPanel();
         }
-    });
 
-    // 2. Функция загрузки списка гостей
-    function loadAdminPanel() {
-        const panel = document.getElementById('adminPanel');
-        const tbody = document.querySelector('#adminTable tbody');
-        const stats = document.getElementById('adminStats');
+        setInterval(rotatePhotos, 2000);
+        </script>
 
-        panel.style.display = 'block';
-        panel.scrollIntoView({ behavior: 'smooth' });
-        stats.innerText = "Загрузка списка гостей...";
+        <script>
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGTYgBXSmxXj75KdO4F1heTp7q6YObaVKTj_BdZz5mnl3CSkezZEwcHibwQ7h-lavHSw/exec";
 
-        const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+            const rsvpForm = document.getElementById('weddingForm');
+            const nameInput = document.getElementById('nameInput');
 
-        window[callbackName] = function (data) {
-            delete window[callbackName];
-            document.body.removeChild(script);
-
-            tbody.innerHTML = '';
-            let totalWillCome = 0;
-
-            if (!Array.isArray(data) || data.length === 0) {
-                stats.innerText = "Список пока пуст.";
-                return;
-            }
-
-            data.forEach(guest => {
-                if (guest.attendance && (guest.attendance.toLowerCase().includes('прид') || guest.attendance.toLowerCase().includes('да'))) {
-                    totalWillCome++;
+            // 1. Отслеживаем ввод "99999" в поле имени для админки
+            nameInput.addEventListener('input', function () {
+                if (this.value.trim() === '99999') {
+                    this.value = '';
+                    loadAdminPanel();
                 }
-                const tr = document.createElement('tr');
-                tr.style.borderBottom = '1px solid #eee';
-                tr.innerHTML = `
+            });
+
+            // 2. Функция загрузки списка гостей
+            function loadAdminPanel() {
+                const panel = document.getElementById('adminPanel');
+                const tbody = document.querySelector('#adminTable tbody');
+                const stats = document.getElementById('adminStats');
+
+                panel.style.display = 'block';
+                panel.scrollIntoView({ behavior: 'smooth' });
+                stats.innerText = "Загрузка списка гостей...";
+
+                const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+
+                window[callbackName] = function (data) {
+                    delete window[callbackName];
+                    document.body.removeChild(script);
+
+                    tbody.innerHTML = '';
+                    let totalWillCome = 0;
+
+                    if (!Array.isArray(data) || data.length === 0) {
+                        stats.innerText = "Список пока пуст.";
+                        return;
+                    }
+
+                    data.forEach(guest => {
+                        if (guest.attendance && (guest.attendance.toLowerCase().includes('прид') || guest.attendance.toLowerCase().includes('да'))) {
+                            totalWillCome++;
+                        }
+                        const tr = document.createElement('tr');
+                        tr.style.borderBottom = '1px solid #eee';
+                        tr.innerHTML = `
                     <td style="padding: 10px; font-weight: bold;">${guest.name || ''}</td>
                     <td style="padding: 10px;">${guest.attendance || ''}</td>
                 `;
-                tbody.appendChild(tr);
+                        tbody.appendChild(tr);
+                    });
+
+                    stats.innerText = `Всего ответов: ${data.length} | Точно придут: ${totalWillCome}`;
+                };
+
+                const script = document.createElement('script');
+                script.src = `${SCRIPT_URL}?callback=${callbackName}`;
+                script.onerror = function () {
+                    stats.innerText = "Ошибка загрузки списка.";
+                };
+                document.body.appendChild(script);
+            }
+
+            // 3. Отправка формы гостем
+            rsvpForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = {
+                    name: nameInput.value,
+                    attendance: document.querySelector('input[name="attendance"]:checked')?.value || 'Не указано',
+                    drinks: '',
+                    message: document.getElementById('guestMessage')?.value || ''
+                };
+
+                // ВМЕСТО СТАРГО ALERT ПОКАЗЫВАЕМ НАШЕ КРАСИВОЕ ОКНО 👇
+                document.getElementById('customModal').style.display = 'flex';
+                rsvpForm.reset();
+
+                // Запрос отправляется в фоновом режиме
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                }).catch(error => {
+                    console.error('Ошибка отправки:', error);
+                });
             });
 
-            stats.innerText = `Всего ответов: ${data.length} | Точно придут: ${totalWillCome}`;
-        };
+            // Обработчик закрытия нашего окна по кнопке "OK"
+            document.getElementById('closeModalBtn').addEventListener('click', function () {
+                document.getElementById('customModal').style.display = 'none';
+            });
+        </script>
 
-        const script = document.createElement('script');
-        script.src = `${SCRIPT_URL}?callback=${callbackName}`;
-        script.onerror = function () {
-            stats.innerText = "Ошибка загрузки списка.";
-        };
-        document.body.appendChild(script);
-    }
+        </body>
 
-    // 3. Отправка формы гостем (МГНОВЕННЫЙ отклик без задержек)
-    rsvpForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const formData = {
-            name: nameInput.value,
-            attendance: document.querySelector('input[name="attendance"]:checked')?.value || 'Не указано',
-            drinks: '',
-            message: document.getElementById('guestMessage')?.value || ''
-        };
-
-        // Сразу показываем сообщение и очищаем форму, не дожидаясь ответа сервера
-        alert("Рахмет! Сіздің жауабыңыз қабылданды.");
-        rsvpForm.reset();
-
-        // А запрос отправляем в фоновом режиме тихо
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        }).catch(error => {
-            console.error('Ошибка отправки:', error);
-        });
-    });
-</script>
-
-</body>
-
-</html>
+        </html>
