@@ -113,16 +113,6 @@
             display: inline-block;
         }
 
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 400;
-            font-style: italic;
-            color: #7A6248;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
         p {
             font-size: 1.4rem;
             max-width: 600px;
@@ -167,16 +157,6 @@
             box-shadow: 0 2px 10px rgba(122, 98, 72, 0.2);
         }
 
-        .btn-gis {
-            background-color: #60B026;
-            /* 2GIS зеленый */
-            box-shadow: 0 4px 12px rgba(96, 176, 38, 0.3);
-        }
-
-        .btn-gis:active {
-            background-color: #4A8C1C;
-        }
-
         /* Кнопка плеера музыки на первом экране */
         .music-player-btn {
             background: #7A6248;
@@ -194,6 +174,8 @@
             gap: 8px;
             transition: all 0.3s ease;
             margin-top: 20px;
+            position: relative;
+            z-index: 9999;
         }
 
         .music-player-btn:active {
@@ -404,17 +386,6 @@
             text-transform: uppercase;
         }
 
-        /* Анкета */
-        .rsvp-form {
-            width: 100%;
-            max-width: 400px;
-            background: #FFF;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-            margin-top: 30px;
-        }
-
         .form-group {
             margin-bottom: 20px;
         }
@@ -492,58 +463,9 @@
                 font-size: 3.5rem;
             }
 
-            .section-title {
-                font-size: 2rem;
-            }
-
             p {
                 font-size: 1.2rem;
             }
-
-            .timer {
-                gap: 10px;
-            }
-
-            .timer-item {
-                padding: 10px;
-                min-width: 60px;
-            }
-
-            .timer-count {
-                font-size: 1.6rem;
-            }
-
-            .rsvp-form {
-                padding: 20px;
-            }
-        }
-
-        /* Контейнер карусели фото ресторана */
-        .restaurant-carousel {
-            width: 100%;
-            max-width: 320px;
-            height: 210px;
-            margin: 15px 0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
-            background: #E0D7CD;
-        }
-
-        .carousel-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-        }
-
-        .carousel-img.active {
-            opacity: 1;
         }
 
         /* Стиль кнопки карты под общий дизайн */
