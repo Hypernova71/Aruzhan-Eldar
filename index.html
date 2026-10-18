@@ -1277,21 +1277,35 @@
             }
 
             data.forEach(guest => {
-                if (guest.attendance &&
-                    (guest.attendance.toLowerCase().includes('прид') ||
-                        guest.attendance.toLowerCase().includes('да') ||
-                        (guest.attendance.toLowerCase().includes('келе') && !guest.attendance.toLowerCase().includes('алмаймын')))
-                ) {
-                    totalWillCome++;
+                const attendanceText = (guest.attendance || '').toLowerCase();
+
+                // 1. Проверяем, что это НЕ отказ (нет слова "алмаймын" и "не")
+                const isNotDeclined = !attendanceText.includes('алмаймын') && !attendanceText.includes('не');
+
+                // 2. Проверяем, придет ли человек с парой
+                const isWithPartner = attendanceText.includes('жұбайыммен') || attendanceText.includes('парой') || attendanceText.includes('супруг');
+
+                // 3. Проверяем, придет ли вообще (содержит "прид", "да", "келе")
+                const isComing = attendanceText.includes('прид') || attendanceText.includes('да') || attendanceText.includes('келе');
+
+                if (isNotDeclined && isComing) {
+                    if (isWithPartner) {
+                        totalWillCome += 2; // Гость + пара = 2 человека
+                    } else {
+                        totalWillCome += 1; // Только 1 человек
+                    }
                 }
+
                 const tr = document.createElement('tr');
                 tr.style.borderBottom = '1px solid #eee';
                 tr.innerHTML = `
-                    <td style="padding: 10px; font-weight: bold;">${guest.name || ''}</td>
-                    <td style="padding: 10px;">${guest.attendance || ''}</td>
-                `;
+        <td style="padding: 10px; font-weight: bold;">${guest.name || ''}</td>
+        <td style="padding: 10px;">${guest.attendance || ''} ${isWithPartner ? '👥 (2 чел.)' : ''}</td>
+    `;
                 tbody.appendChild(tr);
             });
+
+            stats.innerText = `Всего ответов: ${data.length} | Точно придут: ${totalWillCome} чел.`;
 
             stats.innerText = `Всего ответов: ${data.length} | Точно придут: ${totalWillCome}`;
         };
