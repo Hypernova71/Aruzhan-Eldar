@@ -1192,6 +1192,8 @@
 
                     data.forEach(guest => {
                         if (guest.attendance && (guest.attendance.toLowerCase().includes('прид') || guest.attendance.toLowerCase().includes('да') || guest.attendance.toLowerCase().includes('келе'))) {
+                            totalWillCome++;
+                        }
                             const tr = document.createElement('tr');
                             tr.style.borderBottom = '1px solid #eee';
                             tr.innerHTML = `
