@@ -813,7 +813,7 @@
             /* Чтобы картинка не мешала нажимать на кнопки или выделять текст */
         }
 
-        .pgwing{
+        .pgwing {
             position: absolute;
             top: 320px;
             right: 0px;
@@ -1138,19 +1138,19 @@
     const musicText = document.getElementById('musicText');
 
     musicBtn.addEventListener('click', function () {
-    if (audio.paused) {
-    audio.play().then(() => {
-    musicIcon.textContent = '||'; // Иконка паузы
-    musicText.textContent = 'Пауза';
-    }).catch(error => {
-    console.log("Автовоспроизведение заблокировано браузером", error);
-    alert("Нажмите еще раз, чтобы включить музыку.");
-    });
-    } else {
-    audio.pause();
-    musicIcon.textContent = '▶'; // Иконка play
-    musicText.textContent = 'Әуенді қосу';
-    }
+        if (audio.paused) {
+            audio.play().then(() => {
+                musicIcon.textContent = '||'; // Иконка паузы
+                musicText.textContent = 'Пауза';
+            }).catch(error => {
+                console.log("Автовоспроизведение заблокировано браузером", error);
+                alert("Нажмите еще раз, чтобы включить музыку.");
+            });
+        } else {
+            audio.pause();
+            musicIcon.textContent = '▶'; // Иконка play
+            musicText.textContent = 'Әуенді қосу';
+        }
     });
 
     // 2. ТАЙМЕР ОБРАТНОГО ОТСЧЕТА ДО 9 ДЕКАБРЯ 2026, 18:00
@@ -1188,20 +1188,20 @@
         if (!musicBtn) return;
 
         if (window.scrollY > 300) {
-        musicBtn.classList.add('fixed-top-right');
+            musicBtn.classList.add('fixed-top-right');
         } else {
-        musicBtn.classList.remove('fixed-top-right');
+            musicBtn.classList.remove('fixed-top-right');
         }
-        }
+    }
 
-        window.addEventListener('scroll', updateMusicButtonPosition, { passive: true });
-        updateMusicButtonPosition();
+    window.addEventListener('scroll', updateMusicButtonPosition, { passive: true });
+    updateMusicButtonPosition();
 
-        // 4. ЛЕГКАЯ И НАДЕЖНАЯ СМЕНА КАРТИНЕК (Rest1 - Rest5)
-        const photoList = ['Rest1.png', 'Rest2.png', 'Rest3.png', 'Rest4.png', 'Rest5.png'];
-        let centerIdx = 0;
+    // 4. ЛЕГКАЯ И НАДЕЖНАЯ СМЕНА КАРТИНЕК (Rest1 - Rest5)
+    const photoList = ['Rest1.png', 'Rest2.png', 'Rest3.png', 'Rest4.png', 'Rest5.png'];
+    let centerIdx = 0;
 
-        function rotatePhotos() {
+    function rotatePhotos() {
         const imgLeft = document.getElementById('imgLeft');
         const imgCenter = document.getElementById('imgCenter');
         const imgRight = document.getElementById('imgRight');
@@ -1216,117 +1216,121 @@
         imgRight.style.opacity = 0;
 
         setTimeout(() => {
-        imgLeft.src = photoList[leftIdx];
-        imgCenter.src = photoList[centerIdx];
-        imgRight.src = photoList[rightIdx];
+            imgLeft.src = photoList[leftIdx];
+            imgCenter.src = photoList[centerIdx];
+            imgRight.src = photoList[rightIdx];
 
-        imgLeft.style.opacity = 0.55;
-        imgCenter.style.opacity = 1;
-        imgRight.style.opacity = 0.55;
+            imgLeft.style.opacity = 0.55;
+            imgCenter.style.opacity = 1;
+            imgRight.style.opacity = 0.55;
 
-        centerIdx = (centerIdx + 1) % photoList.length;
+            centerIdx = (centerIdx + 1) % photoList.length;
         }, 300);
+    }
+
+    setInterval(rotatePhotos, 2000);
+</script>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGTYgBXSmxXj75KdO4F1heTp7q6YObaVKTj_BdZz5mnl3CSkezZEwcHibwQ7h-lavHSw/exec";
+
+    const rsvpForm = document.getElementById('weddingForm');
+    const nameInput = document.getElementById('nameInput');
+
+    // 1. Отслеживаем ввод "99999" в поле имени для админки
+    nameInput.addEventListener('input', function () {
+        if (this.value.trim() === '99999') {
+            this.value = '';
+            loadAdminPanel();
         }
+    });
 
-        setInterval(rotatePhotos, 2000);
-        </script>
+    // 2. Функция загрузки списка гостей
+    function loadAdminPanel() {
+        const panel = document.getElementById('adminPanel');
+        const tbody = document.querySelector('#adminTable tbody');
+        const stats = document.getElementById('adminStats');
 
-        <script>
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGTYgBXSmxXj75KdO4F1heTp7q6YObaVKTj_BdZz5mnl3CSkezZEwcHibwQ7h-lavHSw/exec";
+        panel.style.display = 'block';
+        panel.scrollIntoView({ behavior: 'smooth' });
+        stats.innerText = "Загрузка списка гостей...";
 
-            const rsvpForm = document.getElementById('weddingForm');
-            const nameInput = document.getElementById('nameInput');
+        const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
 
-            // 1. Отслеживаем ввод "99999" в поле имени для админки
-            nameInput.addEventListener('input', function () {
-                if (this.value.trim() === '99999') {
-                    this.value = '';
-                    loadAdminPanel();
+        window[callbackName] = function (data) {
+            delete window[callbackName];
+            document.body.removeChild(script);
+
+            tbody.innerHTML = '';
+            let totalWillCome = 0;
+
+            if (!Array.isArray(data) || data.length === 0) {
+                stats.innerText = "Список пока пуст.";
+                return;
+            }
+
+            data.forEach(guest => {
+                if (guest.attendance &&
+                    (guest.attendance.toLowerCase().includes('прид') ||
+                        guest.attendance.toLowerCase().includes('да') ||
+                        (guest.attendance.toLowerCase().includes('келе') && !guest.attendance.toLowerCase().includes('алмаймын')))
+                ) {
+                    totalWillCome++;
                 }
-            });
-
-            // 2. Функция загрузки списка гостей
-            function loadAdminPanel() {
-                const panel = document.getElementById('adminPanel');
-                const tbody = document.querySelector('#adminTable tbody');
-                const stats = document.getElementById('adminStats');
-
-                panel.style.display = 'block';
-                panel.scrollIntoView({ behavior: 'smooth' });
-                stats.innerText = "Загрузка списка гостей...";
-
-                const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
-
-                window[callbackName] = function (data) {
-                    delete window[callbackName];
-                    document.body.removeChild(script);
-
-                    tbody.innerHTML = '';
-                    let totalWillCome = 0;
-
-                    if (!Array.isArray(data) || data.length === 0) {
-                        stats.innerText = "Список пока пуст.";
-                        return;
-                    }
-
-                    data.forEach(guest => {
-                        if (guest.attendance && (guest.attendance.toLowerCase().includes('прид') || guest.attendance.toLowerCase().includes('да') || guest.attendance.toLowerCase().includes('келе'))) {
-                            totalWillCome++;
-                        }
-                        const tr = document.createElement('tr');
-                        tr.style.borderBottom = '1px solid #eee';
-                        tr.innerHTML = `
+                const tr = document.createElement('tr');
+                tr.style.borderBottom = '1px solid #eee';
+                tr.innerHTML = `
                     <td style="padding: 10px; font-weight: bold;">${guest.name || ''}</td>
                     <td style="padding: 10px;">${guest.attendance || ''}</td>
                 `;
-                        tbody.appendChild(tr);
-                    });
-
-                    stats.innerText = `Всего ответов: ${data.length} | Точно придут: ${totalWillCome}`;
-                };
-
-                const script = document.createElement('script');
-                script.src = `${SCRIPT_URL}?callback=${callbackName}`;
-                script.onerror = function () {
-                    stats.innerText = "Ошибка загрузки списка.";
-                };
-                document.body.appendChild(script);
-            }
-
-            // 3. Отправка формы гостем
-            rsvpForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const formData = {
-                    name: nameInput.value,
-                    attendance: document.querySelector('input[name="attendance"]:checked')?.value || 'Не указано',
-                    drinks: '',
-                    message: document.getElementById('guestMessage')?.value || ''
-                };
-
-                // ВМЕСТО СТАРГО ALERT ПОКАЗЫВАЕМ НАШЕ КРАСИВОЕ ОКНО 👇
-                document.getElementById('customModal').style.display = 'flex';
-                rsvpForm.reset();
-
-                // Запрос отправляется в фоновом режиме
-                fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                }).catch(error => {
-                    console.error('Ошибка отправки:', error);
-                });
+                tbody.appendChild(tr);
             });
 
-            // Обработчик закрытия нашего окна по кнопке "OK"
-            document.getElementById('closeModalBtn').addEventListener('click', function () {
-                document.getElementById('customModal').style.display = 'none';
-            });
-        </script>
+            stats.innerText = `Всего ответов: ${data.length} | Точно придут: ${totalWillCome}`;
+        };
 
-        </body>
+        const script = document.createElement('script');
+        script.src = `${SCRIPT_URL}?callback=${callbackName}`;
+        script.onerror = function () {
+            stats.innerText = "Ошибка загрузки списка.";
+        };
+        document.body.appendChild(script);
+    }
 
-        </html>
+    // 3. Отправка формы гостем
+    rsvpForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = {
+            name: nameInput.value,
+            attendance: document.querySelector('input[name="attendance"]:checked')?.value || 'Не указано',
+            drinks: '',
+            message: document.getElementById('guestMessage')?.value || ''
+        };
+
+        // ВМЕСТО СТАРГО ALERT ПОКАЗЫВАЕМ НАШЕ КРАСИВОЕ ОКНО 👇
+        document.getElementById('customModal').style.display = 'flex';
+        rsvpForm.reset();
+
+        // Запрос отправляется в фоновом режиме
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        }).catch(error => {
+            console.error('Ошибка отправки:', error);
+        });
+    });
+
+    // Обработчик закрытия нашего окна по кнопке "OK"
+    document.getElementById('closeModalBtn').addEventListener('click', function () {
+        document.getElementById('customModal').style.display = 'none';
+    });
+</script>
+
+</body>
+
+</html>
